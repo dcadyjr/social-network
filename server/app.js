@@ -6,9 +6,6 @@ var path = require('path');
 var UserProfile = require('./models/Profiles');
 var bodyParser = require("body-parser");
 
-
-
-
 	require('./db/db');
 
 app.use(express.static(path.join(__dirname, "views")));
@@ -16,7 +13,6 @@ app.use(express.static(path.join(__dirname, "views")));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.set('views', path.join(__dirname, "views"));
-
 app.set("view engine", "hbs");
 
 
@@ -48,6 +44,17 @@ app.post('/profile', function(request, response){
 })
 
 app.patch('/profile/:id', function(request, response){
+	var id = request.params.id;
+	UserProfile.findById(id, function(err, profile){
+		profile.name = request.body.name;
+		profile.city = request.body.city;
+		profile.positiveQuote = request.body.positiveQuote;
+		profile.website = request.body.website;
+		profile.pic = request.body.pic;
+
+		profile.save();
+		response.json(profile);
+	})
 
 })
 
