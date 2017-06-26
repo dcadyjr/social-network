@@ -3,11 +3,17 @@ var app = express();
 var server = require('http').createServer(app);
 var fs = require('fs');
 var path = require('path');
-var UserProfile = require('../models/Profiles');
+var UserProfile = require('./models/Profiles');
+var bodyParser = require("body-parser");
+
+
+
 
 	require('./db/db');
 
 app.use(express.static(path.join(__dirname, "views")));
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.set('views', path.join(__dirname, "views"));
 
@@ -25,7 +31,7 @@ app.get('/profile/:id', function(req, res){
 	res.render('profile', person);
 })
 
-app.post('/profile/:id', function(request, response){
+app.post('/profile', function(request, response){
 	console.log(request.body);
 
 	var profile = new UserProfile({
@@ -37,7 +43,7 @@ app.post('/profile/:id', function(request, response){
 	})
 
 	profile.save();
-	respond.send('success');
+	response.send('success');
 
 })
 
@@ -45,11 +51,11 @@ app.patch('/profile/:id', function(request, response){
 
 })
 
-app.delete('/profile/:id', functin(request, response){
+app.delete('/profile/:id', function(request, response){
 
 })
 
 
 server.listen(3000, function(){
-	console.log("Your Mom");
+	console.log("Your Mom is listening on port 3000");
 })

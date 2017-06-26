@@ -1,4 +1,4 @@
-var mongoose = ('mongoose');
+var mongoose = require('mongoose');
 
 var ProfileSchema = new mongoose.Schema({
 
@@ -6,7 +6,7 @@ var ProfileSchema = new mongoose.Schema({
 	city: String,
 	positiveQuote: String,
 	website: String,
-	pic: String,
+	pic: String
 })
 
 var profileModel = mongoose.model("Profiles", ProfileSchema);
