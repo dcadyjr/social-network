@@ -6,14 +6,26 @@ var bcrypt = require('bcrypt');
 
 router.use(bodyParser.urlencoded({extended: true}));
 
+//pulls up the registration page
 router.get('/register', function(request, response){
 	response.render('register');
 })
 
+//pulls up the login page
 router.get('/login', function(request, response){
 	response.render('login');
 })
 
+router.get('/:id', function(request, response){
+	
+	var id = request.params.id
+	User.findById(id, function(err, profile){
+	response.render('profile', profile);
+
+	})
+})
+
+//accepts a post from the register page
 router.post('/register', function(request, response){
 	bcrypt.hash(request.body.password, 10, function(error, hash){
 		var user = new User({
@@ -24,19 +36,22 @@ router.post('/register', function(request, response){
 			positiveQuote: request.body.positiveQuote,
 			pic: request.body.pic
 		})
-		console.log(error);
 		user.save();
-		response.redirect('../profile');
+		var id = request.params.id;
+		response.redirect('/' + id);
 	})
 })
 
+//accepts a post from the register page
 router.post('/login', function(request, response){
 	User.findOne({email: request.body.email}, function(error, user){
 		if(user){
 			bcrypt.compare(request.body.password, user.password, function(error, match){
 				if(match === true){
 					request.session.loggedIn = true;
-					response.redirect('../profile');
+					var id = user.id;
+					console.log(id);
+					response.redirect('/users/' + id);
 				}else{
 					response.send("try to login again. You can do it!!");
 				}
