@@ -9,7 +9,10 @@ var bodyParser = require("body-parser");
 	require('./db/db');
 
 var profilesController = require('./controllers/profilesController');
+var UserController = require('./controllers/UserController');
+
 app.use('/profile', profilesController);
+app.use('/users', UserController);
 
 app.use(express.static(path.join(__dirname, "views")));
 
