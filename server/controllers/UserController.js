@@ -37,8 +37,8 @@ router.post('/register', function(request, response){
 			pic: request.body.pic
 		})
 		user.save();
-		var id = request.params.id;
-		response.redirect('/' + id);
+		var id = user.id;
+		response.redirect('/users/' + id);
 	})
 })
 
