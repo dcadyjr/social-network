@@ -5,8 +5,16 @@ var fs = require('fs');
 var path = require('path');
 var UserProfile = require('./models/Profiles');
 var bodyParser = require("body-parser");
+var session = require('express-session');
 
 	require('./db/db');
+
+app.use(session({
+	secret: "shhh, I'm a password",
+	resave: false,
+	saveUnitialized: true,
+	cookie: {secure: false}
+}));
 
 var profilesController = require('./controllers/profilesController');
 var UserController = require('./controllers/UserController');

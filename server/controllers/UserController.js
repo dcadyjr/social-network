@@ -30,5 +30,21 @@ router.post('/register', function(request, response){
 	})
 })
 
+router.post('/login', function(request, response){
+	User.findOne({email: request.body.email}, function(error, user){
+		if(user){
+			bcrypt.compare(request.body.password, user.password, function(error, match){
+				if(match === true){
+					request.session.loggedIn = true;
+					response.redirect('../profile');
+				}else{
+					response.send("try to login again. You can do it!!");
+				}
+			})
+		}else{
+			response.send("try to login again. You can do it!!");
+		}
+	})
+})
 
 module.exports = router;
