@@ -7,7 +7,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 router.get("/", function(request, response){
 	
-	response.render('profile', person);
+	response.render('profile');
 })
 
 router.get('/:id', function(request, response){
@@ -31,7 +31,7 @@ router.post('/', function(request, response){
 	})
 
 	profile.save();
-	response.send('success');
+	response.redirect('../profile');
 
 })
 

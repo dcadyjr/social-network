@@ -10,4 +10,25 @@ router.get('/register', function(request, response){
 	response.render('register');
 })
 
+router.get('/login', function(request, response){
+	response.render('login');
+})
+
+router.post('/register', function(request, response){
+	bcrypt.hash(request.body.password, 10, function(error, hash){
+		var user = new User({
+			email: request.body.email,
+			password: hash,
+			name: request.body.name,
+			city: request.body.city,
+			positiveQuote: request.body.positiveQuote,
+			pic: request.body.pic
+		})
+		console.log(error);
+		user.save();
+		response.redirect('../profile');
+	})
+})
+
+
 module.exports = router;
