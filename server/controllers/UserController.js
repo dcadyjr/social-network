@@ -21,7 +21,8 @@ router.get('/:id', function(request, response){
 	
 	var id = request.params.id
 	User.findById(id, function(err, profile){
-	response.render('profile', profile);
+	var posterId = request.session.userId;
+	response.render('profile', {profile: profile, poster: posterId});
 
 	})
 })
@@ -44,7 +45,9 @@ router.post('/register', function(request, response){
 			pic: request.body.pic
 		})
 		user.save();
+		request.session.loggedIn = true;
 		var id = user.id;
+		request.session.userId = id;
 		response.redirect('/users/' + id);
 	})
 })
@@ -57,7 +60,7 @@ router.post('/login', function(request, response){
 				if(match === true){
 					request.session.loggedIn = true;
 					var id = user.id;
-					console.log(id);
+					request.session.userId = id;
 					response.redirect('/users/' + id);
 				}else{
 					response.send("try to login again. You can do it!!");

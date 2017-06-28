@@ -1,21 +1,24 @@
 
-
 <div>
-	<img src="{{pic}}">
+	<img src="{{profile.pic}}">
 </div>
-<h1>{{name}}</h1>
-<h2>city: {{city}}</h2>
-<h2>positive quote: {{positiveQuote}}</h2>
-<h2>website: {{website}}
+<h1>{{profile.name}}</h1>
+<h2>city: {{profile.city}}</h2>
+<h2>positive quote: {{profile.positiveQuote}}</h2>
 
 
 
-<h3>Say something nice about {{name}}</h3>
-	{{#if loggedIn}}
-		<input placeholder="Say something nice about {{name}}"/>
-	{{/if}}	
 
-<h3>recent compliments about {{name}}</h3>
+<h3>Say something nice about {{profile.name}}</h3>
+	<form action="/compliments" method="POST">
+		<input name="compliment" placeholder="Say something nice about {{profile.name}}"/>
+		<input name="userId" value="{{profile.id}}"/>
+		<input name="posterId" value="{{poster}}"/>
+		<button>submit</button>
+	</form>
+
+<h3>recent compliments about {{profile.name}}</h3>
 	
-<h3>{{name}}'s compliments about others</h3>
+<h3>{{profile.name}}'s compliments about others</h3>
 
+<a href="http://localhost:3000/users/5952d4dd63414f0af15de97a">friend</a>

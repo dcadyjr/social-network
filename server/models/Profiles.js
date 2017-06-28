@@ -5,7 +5,6 @@ var ProfileSchema = new mongoose.Schema({
 	name: String,
 	city: String,
 	positiveQuote: String,
-	website: String,
 	pic: String
 })
 

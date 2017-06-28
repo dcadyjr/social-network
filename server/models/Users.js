@@ -6,8 +6,8 @@ var UserSchema = new mongoose.Schema({
 	name: String,
 	city: String,
 	positiveQuote: String,
-	website: String,
-	pic: String
+	pic: String,
+	compliments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Compliments'}]
 });
 
 module.exports = mongoose.model('User', UserSchema);
