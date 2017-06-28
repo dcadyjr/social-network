@@ -20,9 +20,14 @@ router.get('/login', function(request, response){
 router.get('/:id', function(request, response){
 	
 	var id = request.params.id
-	User.findById(id, function(err, profile){
+	User.findById(id).populate({path: 'compliments', populate: {path: "poster"}}).exec(function(err, profile){
+	// profile.populate('poster');
+	// console.log(profile.populate('poster'));
 	var posterId = request.session.userId;
+	console.log(profile);
 	response.render('profile', {profile: profile, poster: posterId});
+
+
 
 	})
 })

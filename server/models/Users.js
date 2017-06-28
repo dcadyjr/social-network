@@ -7,7 +7,7 @@ var UserSchema = new mongoose.Schema({
 	city: String,
 	positiveQuote: String,
 	pic: String,
-	compliments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Compliments'}]
+	compliments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Compliment'}]
 });
 
 module.exports = mongoose.model('User', UserSchema);

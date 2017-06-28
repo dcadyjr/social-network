@@ -8,14 +8,19 @@
 
 
 
-
+{{!-- "name" value are the keys being sent in the request.body --}}
 <h3>Say something nice about {{profile.name}}</h3>
 	<form action="/compliments" method="POST">
-		<input name="compliment" placeholder="Say something nice about {{profile.name}}"/>
+		<input name="text" placeholder="Say something nice about {{profile.name}}"/>
 		<input name="userId" value="{{profile.id}}"/>
 		<input name="posterId" value="{{poster}}"/>
 		<button>submit</button>
 	</form>
+
+{{#each profile.compliments}}
+{{this.poster.name}}: {{this.text}}
+{{/each}}
+
 
 <h3>recent compliments about {{profile.name}}</h3>
 	

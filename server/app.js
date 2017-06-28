@@ -18,9 +18,11 @@ app.use(session({
 
 var profilesController = require('./controllers/profilesController');
 var UserController = require('./controllers/UserController');
+var ComplimentsController = require('./controllers/ComplimentsController');
 
 app.use('/profile', profilesController);
 app.use('/users', UserController);
+app.use('/compliments', ComplimentsController);
 
 app.use(express.static(path.join(__dirname, "views")));
 
