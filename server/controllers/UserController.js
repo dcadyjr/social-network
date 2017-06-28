@@ -6,16 +6,17 @@ var bcrypt = require('bcrypt');
 
 router.use(bodyParser.urlencoded({extended: true}));
 
-//pulls up the registration page
+//pulls up the registration page//sends request to users/register
 router.get('/register', function(request, response){
 	response.render('register');
 })
 
-//pulls up the login page
+//pulls up the login page//sends request to users/login
 router.get('/login', function(request, response){
 	response.render('login');
 })
 
+//sends request to users/id
 router.get('/:id', function(request, response){
 	
 	var id = request.params.id
@@ -25,7 +26,13 @@ router.get('/:id', function(request, response){
 	})
 })
 
-//accepts a post from the register page
+//users/logout
+router.get('/logout', function(request, response){
+  request.session.loggedIn = false;
+  response.redirect('');
+})
+
+//accepts a post from the users/register
 router.post('/register', function(request, response){
 	bcrypt.hash(request.body.password, 10, function(error, hash){
 		var user = new User({
@@ -42,7 +49,7 @@ router.post('/register', function(request, response){
 	})
 })
 
-//accepts a post from the register page
+//accepts a post from users/login
 router.post('/login', function(request, response){
 	User.findOne({email: request.body.email}, function(error, user){
 		if(user){

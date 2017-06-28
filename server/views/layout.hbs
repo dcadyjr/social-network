@@ -6,6 +6,11 @@
 </head>
 <body>
 	<h1>Welcome to Nice Place</h1>
+
+	{{#if loggedIn}}
+		<a href="/users/logout">log out</a>
+	{{/if}}
+	
 	{{{body}}}
 	<script src="/js/main.js"></script>
 </body>
