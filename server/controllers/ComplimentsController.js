@@ -10,9 +10,10 @@ router.post('/', function(request, response){
 	//grab text from request.body
 	var complimentText = request.body.text;
 	console.log(complimentText)
-	var posterId = request.body.posterId
-	var compliment = new Compliment({text: complimentText, poster: posterId});
+	var posterId = request.body.posterId;
 
+	var compliment = new Compliment({text: complimentText, poster: posterId, receiver: request.body.userId});
+	console.log(request.body.userId);
 	compliment.save();
 
 	User.findById(request.body.userId, function(error, user){
@@ -22,10 +23,17 @@ router.post('/', function(request, response){
 		user.compliments.push(complimentId);
 
 		user.save();
+
+		User.findById(request.body.posterId, function(error, poster){
+
+			var complimentId = compliment.id;
+			poster.gaveCompliments.push(complimentId);
+
+			poster.save();
+
+			response.redirect(request.get('referer'));
+		})
 	
-
-	response.redirect(request.get('referer'));
-
 	})
 })
 

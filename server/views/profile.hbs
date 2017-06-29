@@ -29,4 +29,9 @@
 	
 <h3>{{profile.name}}'s compliments about others</h3>
 
+<ul>
+{{#each profile.gaveCompliments}}
+	<li>{{this.receiver.name}}{{this.text}}</li>
+{{/each}}
+<ul>
 <a href="http://localhost:3000/users/5952d4dd63414f0af15de97a">friend</a>

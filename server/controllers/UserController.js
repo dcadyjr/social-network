@@ -27,7 +27,9 @@ router.get('/logout', function(request, response){
 router.get('/:id', function(request, response){
 	
 	var id = request.params.id
-	User.findById(id).populate({path: 'compliments', populate: {path: "poster"}}).exec(function(err, profile){
+	User.findById(id).populate({path: 'compliments', populate: {path: "poster"}}).populate({path: 'gaveCompliments', populate: {path: 'receiver'}}).exec(function(err, profile){
+	
+
 	// profile.populate('poster');
 	// console.log(profile.populate('poster'));
 	var posterId = request.session.userId;
@@ -35,8 +37,6 @@ router.get('/:id', function(request, response){
 	response.render('profile', {profile: profile, poster: posterId});
 	})
 })
-
-
 
 
 //accepts a post from the users/register
