@@ -17,9 +17,12 @@
 		<button>submit</button>
 	</form>
 
+<h3>recent compliments about {{profile.name}}</h3>
+<ul>
 {{#each profile.compliments}}
-{{this.poster.name}}: {{this.text}}
+<li>{{this.poster.name}}: {{this.text}}</li>
 {{/each}}
+</ul>
 
 
 <h3>recent compliments about {{profile.name}}</h3>

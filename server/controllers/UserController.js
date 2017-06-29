@@ -24,18 +24,16 @@ router.get('/:id', function(request, response){
 	// profile.populate('poster');
 	// console.log(profile.populate('poster'));
 	var posterId = request.session.userId;
-	console.log(profile);
+	// console.log(profile);
 	response.render('profile', {profile: profile, poster: posterId});
-
-
-
 	})
 })
 
 //users/logout
 router.get('/logout', function(request, response){
   request.session.loggedIn = false;
-  response.redirect('');
+
+  response.redirect('/users/login');
 })
 
 //accepts a post from the users/register
