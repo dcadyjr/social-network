@@ -16,6 +16,13 @@ router.get('/login', function(request, response){
 	response.render('login');
 })
 
+//users/logout
+router.get('/logout', function(request, response){
+  request.session.loggedIn = false;
+  console.log("hellop");
+  response.redirect('/users/login');
+})
+
 //sends request to users/id
 router.get('/:id', function(request, response){
 	
@@ -29,12 +36,8 @@ router.get('/:id', function(request, response){
 	})
 })
 
-//users/logout
-router.get('/logout', function(request, response){
-  request.session.loggedIn = false;
 
-  response.redirect('/users/login');
-})
+
 
 //accepts a post from the users/register
 router.post('/register', function(request, response){
