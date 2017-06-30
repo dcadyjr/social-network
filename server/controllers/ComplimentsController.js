@@ -9,11 +9,11 @@ router.use(bodyParser.urlencoded({extended: true}));
 router.post('/', function(request, response){
 	//grab text from request.body
 	var complimentText = request.body.text;
-	console.log(complimentText)
+	
 	var posterId = request.body.posterId;
 
 	var compliment = new Compliment({text: complimentText, poster: posterId, receiver: request.body.userId});
-	console.log(request.body.userId);
+
 	compliment.save();
 
 	User.findById(request.body.userId, function(error, user){

@@ -26,6 +26,9 @@ app.use('/compliments', ComplimentsController);
 
 app.use(express.static(path.join(__dirname, "views")));
 
+router.get('/', function(request, response){
+	respon.render('login');
+})
 
 app.set('views', path.join(__dirname, "views"));
 app.set("view engine", "hbs");

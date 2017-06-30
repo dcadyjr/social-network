@@ -7,6 +7,7 @@ var bcrypt = require('bcrypt');
 router.use(bodyParser.urlencoded({extended: true}));
 
 //pulls up the registration page//sends request to users/register
+
 router.get('/register', function(request, response){
 	response.render('register');
 })
@@ -19,7 +20,7 @@ router.get('/login', function(request, response){
 //users/logout
 router.get('/logout', function(request, response){
   request.session.loggedIn = false;
-  console.log("hellop");
+ 
   response.redirect('/users/login');
 })
 
@@ -29,11 +30,8 @@ router.get('/:id', function(request, response){
 	var id = request.params.id
 	User.findById(id).populate({path: 'compliments', populate: {path: "poster"}}).populate({path: 'gaveCompliments', populate: {path: 'receiver'}}).exec(function(err, profile){
 	
-
-	// profile.populate('poster');
-	// console.log(profile.populate('poster'));
 	var posterId = request.session.userId;
-	// console.log(profile);
+	
 	response.render('profile', {profile: profile, poster: posterId});
 	})
 })

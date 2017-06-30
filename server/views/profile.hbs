@@ -12,8 +12,8 @@
 <h3>Say something nice about {{profile.name}}</h3>
 	<form action="/compliments" method="POST">
 		<input name="text" placeholder="Say something nice about {{profile.name}}"/>
-		<input name="userId" value="{{profile.id}}"/>
-		<input name="posterId" value="{{poster}}"/>
+		<input name="userId" type="hidden" value="{{profile.id}}"/>
+		<input name="posterId" type="hidden" value="{{poster}}"/>
 		<button>submit</button>
 	</form>
 
@@ -34,4 +34,5 @@
 	<li>{{this.receiver.name}}{{this.text}}</li>
 {{/each}}
 <ul>
+
 <a href="http://localhost:3000/users/5952d4dd63414f0af15de97a">friend</a>
